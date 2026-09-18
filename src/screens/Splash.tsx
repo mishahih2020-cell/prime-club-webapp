@@ -1,4 +1,4 @@
-import clubInterior from '../assets/images/club-interior.png';
+import clubInterior from '../assets/images/club-interior.jpg';
 import logo from '../assets/images/logo.png';
 import { Button } from '../components/Button';
 import '../styles/screens.css';

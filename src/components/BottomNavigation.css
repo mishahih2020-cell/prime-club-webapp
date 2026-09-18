@@ -5,8 +5,7 @@
   bottom: 0;
   height: calc(var(--nav-height) + var(--safe-bottom));
   padding-bottom: var(--safe-bottom);
-  background: rgba(10, 10, 11, 0.92);
-  backdrop-filter: blur(12px);
+  background: rgba(10, 10, 11, 0.98);
   border-top: 1px solid var(--border);
   display: flex;
   z-index: 100;

@@ -1,4 +1,4 @@
-import clubInterior from '../assets/images/club-interior.png';
+import clubInterior from '../assets/images/club-interior.jpg';
 import type { TrainingCategory } from '../types';
 
 const CATEGORY_TINT: Record<TrainingCategory, string> = {

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { HandMetal, Layers, Shirt, Droplets, CircleDot, Waves, Clock, BarChart3, Users, ChevronRight, type LucideIcon } from 'lucide-react';
-import clubInterior from '../assets/images/club-interior.png';
+import clubInterior from '../assets/images/club-interior.jpg';
 import { OverlayHeader } from '../components/Header';
 import { Card, Skeleton, StatusBadge, spotsState } from '../components/Shared';
 import { TrainerAvatar } from '../components/TrainerAvatar';
