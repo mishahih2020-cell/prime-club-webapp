@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { AppShell } from './components/AppShell';
 import { AppStateProvider } from './context/AppStateContext';
-import { initTelegram, watchAppHeight } from './lib/telegram';
+import { initTelegram } from './lib/telegram';
 import { Splash } from './screens/Splash';
 import { Home } from './screens/Home';
 import { Schedule } from './screens/Schedule';
@@ -23,7 +23,6 @@ export default function App() {
 
   useEffect(() => {
     initTelegram();
-    return watchAppHeight();
   }, []);
 
   if (!entered) {

@@ -85,29 +85,3 @@ export function closeWebApp() {
 export function isInTelegram(): boolean {
   return !!getTelegram();
 }
-
-/**
- * На части реальных Telegram-клиентов процентная высота (html/body 100%)
- * не успевает корректно посчитаться от контейнера WebView. Держим
- * реальную высоту вьюпорта в CSS-переменной как надёжный fallback —
- * обновляем её на resize/orientationchange и на событие Telegram
- * viewportChanged.
- */
-export function watchAppHeight(): () => void {
-  const apply = () => {
-    document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
-  };
-  apply();
-
-  window.addEventListener('resize', apply);
-  window.addEventListener('orientationchange', apply);
-
-  const tg = getTelegram();
-  tg?.onEvent?.('viewportChanged', apply);
-
-  return () => {
-    window.removeEventListener('resize', apply);
-    window.removeEventListener('orientationchange', apply);
-    tg?.offEvent?.('viewportChanged', apply);
-  };
-}

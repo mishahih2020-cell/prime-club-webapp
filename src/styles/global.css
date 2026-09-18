@@ -5,31 +5,21 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html {
-  height: 100%;
-  height: var(--app-height, 100%);
-  overflow: hidden;
-}
-
-body {
+html, body {
   margin: 0;
   padding: 0;
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-sans);
   width: 100%;
-  height: 100%;
-  height: var(--app-height, 100%);
-  overflow: hidden;
-  overscroll-behavior: none;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
 }
 
 #root {
-  width: 100%;
-  height: 100%;
-  height: var(--app-height, 100%);
+  min-height: 100vh;
+  min-height: 100dvh;
   background: var(--bg-primary);
-  overflow: hidden;
 }
 
 button {
@@ -64,9 +54,10 @@ h1, h2, h3, p {
 }
 
 .screen {
-  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
   background: var(--bg-primary);
   display: flex;
   flex-direction: column;
@@ -74,10 +65,6 @@ h1, h2, h3, p {
 
 .scroll-content {
   flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
 

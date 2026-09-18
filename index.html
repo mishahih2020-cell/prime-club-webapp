@@ -12,6 +12,35 @@
   </head>
   <body>
     <div id="root"></div>
+    <div id="crash-overlay" style="display:none; position:fixed; inset:0; background:#0a0a0b; color:#ff6b6b; z-index:999999; padding:16px; font-family:monospace; font-size:12px; line-height:1.5; overflow:auto; white-space:pre-wrap;"></div>
+    <script>
+      (function () {
+        function showCrash(text) {
+          var el = document.getElementById('crash-overlay');
+          if (!el) return;
+          el.style.display = 'block';
+          el.textContent += (el.textContent ? '\n---\n' : 'ДИАГНОСТИКА ОШИБКИ:\n') + text;
+        }
+        window.addEventListener('error', function (e) {
+          showCrash('window.onerror: ' + e.message + (e.error && e.error.stack ? '\n' + e.error.stack : ''));
+        });
+        window.addEventListener('unhandledrejection', function (e) {
+          var reason = e.reason;
+          showCrash('unhandledrejection: ' + (reason && reason.message ? reason.message : String(reason)) + (reason && reason.stack ? '\n' + reason.stack : ''));
+        });
+        setTimeout(function () {
+          var root = document.getElementById('root');
+          if (root && root.offsetHeight === 0) {
+            showCrash(
+              'DIAGNOSTIC: #root высота 0px (контент не падал с ошибкой, но визуально не помещается).\n' +
+              'window.innerHeight=' + window.innerHeight +
+              ', clientHeight=' + document.documentElement.clientHeight +
+              ', root.innerHTML.length=' + (root.innerHTML ? root.innerHTML.length : 0)
+            );
+          }
+        }, 2000);
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
