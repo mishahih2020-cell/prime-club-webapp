@@ -17,19 +17,23 @@ const CATEGORY_POSITION: Record<TrainingCategory, string> = {
 
 interface TrainingVisualProps {
   category: TrainingCategory;
+  /** Жёсткая высота — контент, выходящий за неё, будет обрезан. Для плиток с коротким текстом. */
   height?: number | string;
+  /** Минимальная высота — карточка растягивается под контент, ничего не обрезается. */
+  minHeight?: number | string;
   radius?: number;
   children?: React.ReactNode;
   className?: string;
 }
 
-export function TrainingVisual({ category, height = 120, radius = 16, children, className = '' }: TrainingVisualProps) {
+export function TrainingVisual({ category, height, minHeight, radius = 16, children, className = '' }: TrainingVisualProps) {
   return (
     <div
       className={className}
       style={{
         position: 'relative',
-        height,
+        height: height ?? (minHeight ? 'auto' : 120),
+        minHeight,
         borderRadius: radius,
         overflow: 'hidden',
         flexShrink: 0,

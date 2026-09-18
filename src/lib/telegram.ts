@@ -3,6 +3,9 @@ interface TelegramWebApp {
   expand: () => void;
   close: () => void;
   enableClosingConfirmation?: () => void;
+  disableVerticalSwipes?: () => void;
+  requestFullscreen?: () => void;
+  isVersionAtLeast?: (version: string) => boolean;
   setHeaderColor?: (color: string) => void;
   setBackgroundColor?: (color: string) => void;
   BackButton: {
@@ -33,6 +36,10 @@ export function initTelegram() {
   try {
     tg.ready();
     tg.expand();
+    // Запрещаем жест "потянуть вниз для закрытия" — иначе скролл контента
+    // внутри приложения может восприниматься Telegram как желание выйти.
+    tg.disableVerticalSwipes?.();
+    tg.requestFullscreen?.();
     tg.setHeaderColor?.('#0a0a0b');
     tg.setBackgroundColor?.('#0a0a0b');
   } catch {

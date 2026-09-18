@@ -1,8 +1,9 @@
 /* ---------- SPLASH ---------- */
 .splash {
-  position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
+  position: fixed;
+  inset: 0;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -80,11 +81,13 @@
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  min-height: 220px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  gap: 6px;
   padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 .hero-label {
   font-size: 12px;
@@ -92,20 +95,23 @@
   letter-spacing: 0.08em;
   color: var(--accent-hover);
   font-weight: 700;
-  margin-bottom: 8px;
 }
 .hero-title {
   font-size: 22px;
   font-weight: 800;
   color: #fff;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 .hero-meta {
   font-size: 14px;
   color: rgba(255,255,255,0.85);
-  margin-top: 6px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 .hero-cta {
-  margin-top: 16px;
+  margin-top: 10px;
+  width: 100%;
 }
 .section-title-row {
   display: flex;

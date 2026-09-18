@@ -67,7 +67,7 @@ export function Home() {
       </div>
 
       {upcoming && upcomingTraining && upcomingTrainer ? (
-        <TrainingVisual category={upcomingTraining.category} height={220} radius={22} className="hero-card">
+        <TrainingVisual category={upcomingTraining.category} minHeight={220} radius={22} className="hero-card">
           <div className="hero-label">Ближайшая тренировка</div>
           <div className="hero-title">{upcomingTraining.title}</div>
           <div className="hero-meta">
@@ -78,7 +78,7 @@ export function Home() {
           </Button>
         </TrainingVisual>
       ) : (
-        <TrainingVisual category="boxing" height={220} radius={22} className="hero-card">
+        <TrainingVisual category="boxing" minHeight={220} radius={22} className="hero-card">
           <div className="hero-label">Начните сегодня</div>
           <div className="hero-title">Выберите тренировку</div>
           <div className="hero-meta">Бокс · MMA · Кроссфит · Функционал</div>
