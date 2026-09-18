@@ -8,12 +8,14 @@ export function Splash({ onStart }: { onStart: () => void }) {
     <div className="splash">
       <img className="splash-bg" src={clubInterior} alt="PRIME CLUB" />
       <div className="splash-overlay" />
-      <div className="splash-content anim-fade-in">
+
+      <div className="splash-center anim-fade-in">
         <img className="splash-logo" src={logo} alt="PRIME CLUB" />
-        <div>
-          <div className="splash-title">СИЛЬНЫЕ ЛЮДИ ЗДЕСЬ</div>
-          <div className="splash-subtitle">Тренировки. Комьюнити. Результат.</div>
-        </div>
+        <div className="splash-title">СИЛЬНЫЕ ЛЮДИ ЗДЕСЬ</div>
+        <div className="splash-subtitle">Тренировки. Комьюнити. Результат.</div>
+      </div>
+
+      <div className="splash-bottom anim-fade-in">
         <Button fullWidth className="splash-cta" onClick={onStart}>
           Начать
         </Button>

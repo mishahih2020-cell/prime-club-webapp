@@ -36,10 +36,15 @@ export function initTelegram() {
   try {
     tg.ready();
     tg.expand();
-    // Запрещаем жест "потянуть вниз для закрытия" — иначе скролл контента
-    // внутри приложения может восприниматься Telegram как желание выйти.
-    tg.disableVerticalSwipes?.();
-    tg.requestFullscreen?.();
+    // disableVerticalSwipes/requestFullscreen появились в Bot API 7.7/8.0 —
+    // на старых клиентах (например 6.0) их вызов пишет ошибку в консоль,
+    // поэтому проверяем версию явно, а не просто optional chaining.
+    if (tg.isVersionAtLeast?.('7.7')) {
+      tg.disableVerticalSwipes?.();
+    }
+    if (tg.isVersionAtLeast?.('8.0')) {
+      tg.requestFullscreen?.();
+    }
     tg.setHeaderColor?.('#0a0a0b');
     tg.setBackgroundColor?.('#0a0a0b');
   } catch {

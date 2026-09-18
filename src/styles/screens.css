@@ -1,12 +1,10 @@
 /* ---------- SPLASH ---------- */
 .splash {
-  position: fixed;
-  inset: 0;
+  position: relative;
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   overflow: hidden;
 }
 .splash-bg {
@@ -22,14 +20,17 @@
   inset: 0;
   background: linear-gradient(180deg, rgba(10,10,11,0.35) 0%, rgba(10,10,11,0.55) 40%, rgba(10,10,11,0.97) 100%);
 }
-.splash-content {
+/* Логотип + заголовок — по центру экрана */
+.splash-center {
   position: relative;
   z-index: 2;
-  padding: 0 24px calc(40px + var(--safe-bottom));
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 22px;
+  justify-content: center;
+  padding: 0 24px;
   text-align: center;
 }
 .splash-logo {
@@ -38,6 +39,7 @@
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+  margin-bottom: 22px;
 }
 .splash-title {
   font-size: 32px;
@@ -49,11 +51,16 @@
 .splash-subtitle {
   font-size: 15px;
   color: var(--text-secondary);
-  margin-top: -8px;
+  margin-top: 5mm;
+}
+.splash-bottom {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  padding: 0 24px calc(40px + var(--safe-bottom));
 }
 .splash-cta {
   width: 100%;
-  margin-top: 8px;
 }
 
 /* ---------- HOME ---------- */
