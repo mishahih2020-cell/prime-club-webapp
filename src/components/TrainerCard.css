@@ -1,0 +1,31 @@
+.trainer-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-align: left;
+}
+.trainer-card-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.trainer-card-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.trainer-card-spec {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.trainer-card-arrow {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
