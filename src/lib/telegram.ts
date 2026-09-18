@@ -23,6 +23,8 @@ interface TelegramWebApp {
   };
   viewportHeight?: number;
   colorScheme?: 'light' | 'dark';
+  onEvent?: (event: string, cb: () => void) => void;
+  offEvent?: (event: string, cb: () => void) => void;
 }
 
 function getTelegram(): TelegramWebApp | null {
@@ -36,14 +38,12 @@ export function initTelegram() {
   try {
     tg.ready();
     tg.expand();
-    // disableVerticalSwipes/requestFullscreen появились в Bot API 7.7/8.0 —
-    // на старых клиентах (например 6.0) их вызов пишет ошибку в консоль,
-    // поэтому проверяем версию явно, а не просто optional chaining.
+    // requestFullscreen (Bot API 8.0) сознательно не вызываем: это нативный
+    // переход в fullscreen, который без ручной обработки события
+    // viewportChanged может ломать раскладку на части реальных клиентов.
+    // expand() уже даёт разворот на весь доступный экран и стабилен везде.
     if (tg.isVersionAtLeast?.('7.7')) {
       tg.disableVerticalSwipes?.();
-    }
-    if (tg.isVersionAtLeast?.('8.0')) {
-      tg.requestFullscreen?.();
     }
     tg.setHeaderColor?.('#0a0a0b');
     tg.setBackgroundColor?.('#0a0a0b');
@@ -84,4 +84,30 @@ export function closeWebApp() {
 
 export function isInTelegram(): boolean {
   return !!getTelegram();
+}
+
+/**
+ * На части реальных Telegram-клиентов процентная высота (html/body 100%)
+ * не успевает корректно посчитаться от контейнера WebView. Держим
+ * реальную высоту вьюпорта в CSS-переменной как надёжный fallback —
+ * обновляем её на resize/orientationchange и на событие Telegram
+ * viewportChanged.
+ */
+export function watchAppHeight(): () => void {
+  const apply = () => {
+    document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
+  };
+  apply();
+
+  window.addEventListener('resize', apply);
+  window.addEventListener('orientationchange', apply);
+
+  const tg = getTelegram();
+  tg?.onEvent?.('viewportChanged', apply);
+
+  return () => {
+    window.removeEventListener('resize', apply);
+    window.removeEventListener('orientationchange', apply);
+    tg?.offEvent?.('viewportChanged', apply);
+  };
 }
